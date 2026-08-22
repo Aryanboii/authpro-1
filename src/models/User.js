@@ -3,22 +3,78 @@ const { lowercase } = require("zod");
 
 const userSchema = new mongoose.Schema(
     {
-        name:{
-            type: String,
-            required: [true, "Name is required"],
-            trim : true,
-            minlength: [2,"Name must be two char long"],
-            maxLength: [50, "Name cannot be exceed 50 characters"],
+         name: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 2,
+      maxlength: 50,
+    },
 
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
 
-        },
-        email:{
-            type: String,
-            required: [true, "Email is required"],
-            unique: true,
-            lowercase: true,
-            trim: true,
- 
-        },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+      select: false,
+    },
+
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
+
+    isEmailVerified:{
+        type: Boolean,
+        default: false,
+    },
+
+    refreshToken:{
+        type: String,
+        default: null,
+    },
+
+    passwordChangedAt:{
+        type: Date,
+        default: null,
+    },
+
+    passwordResetToken:{
+        type: String,
+        default: null,
+    },
+
+    passwordResetExpires:{
+        type: Date,
+        default: null,
+    },
+
+    emailVerificationToken:{
+        type: String,
+        default: null,
+    },
+    
+    emailVerificationExpires:{
+        type: Date,
+        default: null,
+    },
+
+    },
+
+    {
+     timestamps : true,
     }
 )
+
+
+const User = mongoose.model("User",userSchema);
+
+module.exports = User;
