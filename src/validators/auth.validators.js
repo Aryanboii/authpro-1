@@ -1,25 +1,23 @@
-const  {z} = required("zod");
+const { z } = require("zod");
 
 const registerSchema = z.object({
-    name: z
+  name: z
     .string()
-    .min(2,"Name must be at least 2 character")
-    .max(25, "Name cannot exceed 50 character")
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name cannot exceed 50 characters")
     .trim(),
 
-    email: z
+  email: z
     .string()
     .email("Please provide a valid email")
     .trim()
-    .tolowerCase(),
+    .toLowerCase(),
 
-    password: z
+  password: z
     .string()
-    .min(8,"Password must be 8 characters long")
-
+    .min(8, "Password must be at least 8 characters long")
 });
 
-module.export ={
-
-    registerSchema,
+module.exports = {
+  registerSchema,
 };
