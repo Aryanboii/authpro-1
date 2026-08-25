@@ -4,7 +4,7 @@ const { registerUser } = require("../services/auth.service");
 const register = async(req,res) =>{
     try{
         // validate request body
-        const validatedData = registerSchema = registerSchema.parse(req.body);
+        const validatedData = registerSchema.parse(req.body);
 
         // Register user
 
