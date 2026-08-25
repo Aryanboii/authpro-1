@@ -25,8 +25,35 @@ const  registerUser = async({name,email,password})=>{
     return user;
 }
 
+const loginUser = async ({email,password})=>{
+     
+    // find user by email
+    const user = await User.findOne({email});
+
+    // check if user exists
+
+    if(!user){
+        throw new Error("Invalid email or password");
+    }
+
+    // Compare password
+
+    const isPasswordCorrect = await bcrypt.compare(
+        password,
+        user.password
+    );
+
+    // check password
+    if(!isPasswordCorrect){
+        throw new Error("Invalid email or password");
+    }
+
+    return user;
+}
+
 module.exports = {
    
     registerUser,
+    loginUser,
     
 }
