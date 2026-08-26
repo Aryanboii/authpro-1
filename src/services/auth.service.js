@@ -28,7 +28,7 @@ const  registerUser = async({name,email,password})=>{
 const loginUser = async ({email,password})=>{
      
     // find user by email
-    const user = await User.findOne({email});
+    const user = await User.findOne({email}.select("+password"));
 
     // check if user exists
 

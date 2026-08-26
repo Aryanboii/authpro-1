@@ -1,80 +1,76 @@
 const mongoose = require("mongoose");
-const { lowercase } = require("zod");
 
 const userSchema = new mongoose.Schema(
     {
-         name: {
-      type: String,
-      required: true,
-      trim: true,
-      minlength: 2,
-      maxlength: 50,
-    },
+        name: {
+            type: String,
+            required: true,
+            trim: true,
+            minlength: 2,
+            maxlength: 50,
+        },
 
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            lowercase: true,
+            trim: true,
+        },
 
-    password: {
-      type: String,
-      required: true,
-      minlength: 8,
-      select: false,
-    },
+        password: {
+            type: String,
+            required: true,
+            minlength: 8,
+            select: false,
+        },
 
-    role: {
-      type: String,
-      enum: ["user", "admin"],
-      default: "user",
-    },
+        role: {
+            type: String,
+            enum: ["user", "admin"],
+            default: "user",
+        },
 
-    isEmailVerified:{
-        type: Boolean,
-        default: false,
-    },
+        isEmailVerified: {
+            type: Boolean,
+            default: false,
+        },
 
-    refreshToken:{
-        type: String,
-        default: null,
-    },
+        refreshToken: {
+            type: String,
+            default: null,
+        },
 
-    passwordChangedAt:{
-        type: Date,
-        default: null,
-    },
+        passwordChangedAt: {
+            type: Date,
+            default: null,
+        },
 
-    passwordResetToken:{
-        type: String,
-        default: null,
-    },
+        passwordResetToken: {
+            type: String,
+            default: null,
+        },
 
-    passwordResetExpires:{
-        type: Date,
-        default: null,
-    },
+        passwordResetExpires: {
+            type: Date,
+            default: null,
+        },
 
-    emailVerificationToken:{
-        type: String,
-        default: null,
-    },
-    
-    emailVerificationExpires:{
-        type: Date,
-        default: null,
-    },
+        emailVerificationToken: {
+            type: String,
+            default: null,
+        },
 
+        emailVerificationExpires: {
+            type: Date,
+            default: null,
+        },
     },
-
     {
-     timestamps : true,
+        timestamps: true,
     }
-)
+);
 
-
-const User = mongoose.model("User",userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
