@@ -43,19 +43,43 @@ const loginUser = async ({ email, password }) => {
         throw new Error("Invalid email or password");
     }
 
+
+  
+
+    
     //  Generate access token 
     const accessToken = generateAccessToken(user);
-
-
-
+    
+    
+    
     return {
         user,  
         accessToken,
-
+        
     };
+        
+
+
+};
+
+
+ const logoutUser = async (userId) => {
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new Error("User not found");
+    }
+
+    // Remove refresh token
+    user.refreshToken = null;
+
+    await user.save();
+
+    return true;
 };
 
 module.exports = {
     registerUser,
     loginUser,
+    logoutUser,
 };

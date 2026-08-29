@@ -1,5 +1,5 @@
 const { registerSchema, loginSchema } = require("../validators/auth.validators");
-const { registerUser, loginUser } = require("../services/auth.service");
+const { registerUser, loginUser ,logoutUser } = require("../services/auth.service");
 
 const register = async(req,res) =>{
     try{
@@ -64,7 +64,25 @@ const login = async (req, res) => {
 
 
 
+const logout = async (req, res) => {
+    try {
+        await logoutUser(req.user._id);
+
+        return res.status(200).json({
+            success: true,
+            message: "Logout successful",
+        });
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+
 module.exports = {
     register,
     login,
+    logout,
 };
